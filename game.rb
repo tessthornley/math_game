@@ -16,7 +16,7 @@ class Game
   end
 
   def game_over?
-    @players.select {|player| !player.dead?}.count == 1
+    @player1.dead? || @player2.dead?
   end
 
   def end_game
