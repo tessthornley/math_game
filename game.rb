@@ -7,7 +7,6 @@ class Game
     @player1 = Player.new("Player 1")
     @player2 = Player.new("Player 2")
     @players = [@player1, @player2]
-    @player_index = 0
     @turn = Turn.new(@players)
   end
 
@@ -20,7 +19,11 @@ class Game
   end
 
   def end_game
-    winner = @players.select{|player| !player.dead?}.first
+    if @player1.dead?
+      winner = @player2
+    else
+      winner = @player1
+    end
     puts "#{winner.name} wins with a score of #{winner.lives}/3"
     puts "--- GAME OVER ---"
   end
@@ -28,7 +31,7 @@ class Game
   def run
     until (game_over?)
       @turn.next_question
-      current_player = @turn.next_player
+      @turn.next_player
       summary
       end
     end_game

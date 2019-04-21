@@ -2,22 +2,20 @@ require './question'
 
 class Turn
 
+  attr_accessor :current_player, :players
+
   def initialize(players) 
     @players = players
-    @player_index = 0
-  end
-
-  def current_player
-    @players[@player_index]
+    @current_player = @players[0]
   end
 
   def next_player
-    if @player_index == 0
-      @player_index = 1
+    if @current_player == @players[0]
+      @current_player = @players[1]
     else 
-      @player_index = 0
+      @current_player = @players[0]
     end
-    @players[@player_index]
+    @current_player
   end
 
   def next_question
